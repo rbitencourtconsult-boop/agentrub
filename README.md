@@ -1,12 +1,15 @@
-# AgentRub - Landing page estática
+Fala João ! Beleza?
 
-## Publicar no GitHub Pages
+Subi uma landing page que criei, foi construída pensando em vender os meus serviços de criação de Agentes de IA. 
 
-1. Crie um repositório no GitHub.
-2. Envie `index.html`, `favicon.svg` e a pasta `assets` para a raiz do repositório.
-3. Em **Settings > Pages**, selecione **Deploy from a branch**, branch `main` e pasta `/root`.
-4. Salve e aguarde a publicação.
+A ideia do site é mostrar como os agentes que eu desenvolvo vão botar a operação pra rodar no automático e colocar grana no bolso:
 
-O projeto não precisa de instalação, compilação ou servidor. O simulador e as interações funcionam com HTML, CSS e JavaScript puros.
+Chega de Bot Burro: A página deixa claro que não é chatizinha de regra pronta, é IA de verdade, inteligente, que atende, qualifica e vende.
 
-O WhatsApp configurado é **(49) 99119-1991**. Para alterá-lo, procure por `5549991191991` no arquivo `index.html`.
+Proposta na Veia: O cara bate o olho, entende o valor na hora e já cai direto na chamada pra fechar comigo.
+
+Comunicação direta, mostrando a dor do cliente e como a minha IA resolve a treta no suporte, no comercial e no CRM.
+
+Dá uma olhada no projeto e me fala o que achou da estrutura! 
+
+Abraço
