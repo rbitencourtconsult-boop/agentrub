@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>AgentRub - Agentes de IA Personalizados</title>
+  <meta name="description" content="Agentes de IA personalizados para conhecer sua rotina, seguir suas regras e transformar tarefas em execução."/>
+  <meta name="theme-color" content="#001C28"/>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./favicon.png"/>
+  <link rel="shortcut icon" type="image/png" href="./favicon.png"/>
+  <link rel="apple-touch-icon" href="./favicon.png"/>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="AgentRub - Agentes de IA Personalizados"/>
+  <meta property="og:description" content="Agentes de IA personalizados para conhecer sua rotina, seguir suas regras e transformar tarefas em execução."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:locale" content="pt_BR"/>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="AgentRub - Agentes de IA Personalizados"/>
+  <meta name="twitter:description" content="Agentes de IA personalizados para conhecer sua rotina, seguir suas regras e transformar tarefas em execução."/>
+
+  <meta name="codex-preview" content="development"/>
+
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <main>
+    <!-- Navegação -->
+    <nav class="nav shell" aria-label="Navegação principal">
+      <a href="#inicio" class="brand" aria-label="Página inicial AgentRub">
+        <img src="assets/agentrub-logo.png" alt="AgentRub"/>
+      </a>
+      <div class="nav-links">
+        <a href="#possibilidades">Possibilidades</a>
+        <a href="#personalizacao">Personalização</a>
+        <a href="#como-funciona">Como funciona</a>
+      </div>
+      <a
+        href="https://wa.me/5549991191991?text=Ol%C3%A1%2C%20quero%20descobrir%20o%20que%20posso%20automatizar%20com%20o%20AgentRub."
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nav-cta"
+        aria-label="Falar com um especialista no WhatsApp"
+      >
+        Falar com um especialista <span aria-hidden="true">↗</span>
+      </a>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero shell" id="inicio">
+      <div class="hero-copy">
+        <div class="eyebrow">
+          <span class="live-dot" aria-hidden="true"></span>
+          AGENTES DE IA PERSONALIZADOS
+        </div>
+        <h1>Sua empresa não precisa de mais uma ferramenta.</h1>
+        <h2>Precisa de alguém que <em>entenda como ela funciona.</em></h2>
+        <p>
+          Criamos um agente de IA para conhecer sua rotina, seguir suas regras
+          e transformar tarefas em execução — do seu jeito.
+        </p>
+        <div class="hero-actions">
+          <a
+            href="https://wa.me/5549991191991?text=Ol%C3%A1%2C%20quero%20descobrir%20o%20que%20posso%20automatizar%20com%20o%20AgentRub."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary"
+          >
+            Quero conhecer meu agente <span aria-hidden="true">→</span>
+          </a>
+          <a href="#demonstracao" class="btn-secondary">
+            <span class="play" aria-hidden="true">▶</span>
+            Ver o AgentRub em ação
+          </a>
+        </div>
+        <div class="trust-row">
+          <span>✓ Primeira versão em até 48h</span>
+          <span>✓ Plataforma própria e responsiva</span>
+          <span>✓ Feito para sua operação</span>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="orbit orbit-a" aria-hidden="true"></div>
+        <div class="orbit orbit-b" aria-hidden="true"></div>
+        <div class="agent-glow" aria-hidden="true"></div>
+        <img
+          src="assets/rub-ruby-apresentacao.png"
+          alt="RUB e ANA apresentando os agentes de IA personalizados da AgentRub"
+          class="agents-img"
+        />
+        <div class="status-pill" role="status" aria-live="polite">
+          <span aria-hidden="true"></span>
+          <b id="agent-status-name">RUB</b> · PRONTO PARA AJUDAR
+        </div>
+        <div class="agent-toggle" role="group" aria-label="Selecionar personagem">
+          <button
+            type="button"
+            class="active"
+            id="agent-toggle-rub"
+            aria-pressed="true"
+          >
+            RUB <small>Executivo</small>
+          </button>
+          <button
+            type="button"
+            class="ana"
+            id="agent-toggle-ana"
+            aria-pressed="false"
+          >
+            ANA <small>Executiva</small>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Faixa de dores -->
+    <section class="pain-strip" aria-label="Problemas comuns">
+      <div class="shell pain-grid">
+        <div>
+          <span>01</span>
+          <p>Mensagens esperando resposta?</p>
+        </div>
+        <div>
+          <span>02</span>
+          <p>Propostas sem acompanhamento?</p>
+        </div>
+        <div>
+          <span>03</span>
+          <p>Informação espalhada?</p>
+        </div>
+        <div>
+          <span>04</span>
+          <p>Tudo depende de você?</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calculadora -->
+    <section class="section shell center-intro" aria-labelledby="calc-heading">
+      <div class="eyebrow">O CUSTO INVISÍVEL DA ROTINA</div>
+      <h2 id="calc-heading">
+        Quanto do seu tempo está sendo consumido por tarefas que
+        <em>poderiam acontecer sozinhas?</em>
+      </h2>
+      <p>Faça uma estimativa. O resultado pode surpreender.</p>
+
+      <div class="calculator" role="region" aria-label="Calculadora de custo da rotina">
+        <div class="calc-controls">
+          <label for="weekly-hours">
+            Horas repetitivas por pessoa/semana
+            <b id="weekly-hours-value">5h</b>
+            <input
+              type="range"
+              id="weekly-hours"
+              min="1"
+              max="40"
+              value="5"
+              aria-describedby="weekly-hours-value"
+            />
+          </label>
+
+          <div class="input-row">
+            <div>
+              <label for="hourly-rate">Valor aproximado da hora</label>
+              <div class="money-input">
+                <span aria-hidden="true">R$</span>
+                <input
+                  type="text"
+                  id="hourly-rate"
+                  inputmode="decimal"
+                  value="200,00"
+                  aria-label="Valor aproximado da hora em reais"
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+            <div>
+              <label for="people-count">Pessoas envolvidas</label>
+              <div class="number-input" role="group" aria-label="Quantidade de pessoas">
+                <button
+                  type="button"
+                  id="decrease-people"
+                  aria-label="Diminuir quantidade de pessoas"
+                >−</button>
+                <b id="people-count" aria-live="polite">1</b>
+                <button
+                  type="button"
+                  id="increase-people"
+                  aria-label="Aumentar quantidade de pessoas"
+                >+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-result" aria-live="polite">
+          <div class="result-label">ISSO REPRESENTA</div>
+          <div class="result-main">
+            <strong id="annual-hours">260</strong>
+            <span>horas por ano</span>
+          </div>
+          <div class="result-stats">
+            <div>
+              <small>Tempo por mês</small>
+              <b id="monthly-hours">22 horas</b>
+            </div>
+            <div>
+              <small>Custo estimado/mês</small>
+              <b id="monthly-cost">R$ 4.330,00</b>
+            </div>
+            <div>
+              <small>Custo estimado/ano</small>
+              <b id="annual-cost">R$ 52.000,00</b>
+            </div>
+          </div>
+          <p>
+            Tempo que poderia voltar para vendas, estratégia, família — ou
+            simplesmente para você.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Possibilidades -->
+    <section class="section capabilities" id="possibilidades">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">UM AGENTE. MUITAS POSSIBILIDADES.</div>
+            <h2>O que você pode <em>automatizar?</em></h2>
+          </div>
+          <p>
+            O AgentRub é configurável. Ele recebe as funções que fazem sentido
+            para sua realidade — sem pacotes engessados.
+          </p>
+        </div>
+
+        <div class="cap-grid">
+          <article>
+            <div class="cap-num">01</div>
+            <div class="cap-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 6V2H8"/>
+                <path d="m8 18-4 4V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2Z"/>
+                <path d="M2 12h2"/>
+                <path d="M9 11v2"/>
+                <path d="M15 11v2"/>
+                <path d="M20 12h2"/>
+              </svg>
+            </div>
+            <h3>Atendimento e relacionamento</h3>
+            <p>
+              Responde dúvidas, prepara mensagens, acompanha clientes e
+              organiza o histórico das conversas.
+            </p>
+            <span class="learn">Explorar possibilidades →</span>
+          </article>
+
+          <article>
+            <div class="cap-num">02</div>
+            <div class="cap-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 16v5"/>
+                <path d="M16 14v7"/>
+                <path d="M20 10v11"/>
+                <path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15"/>
+                <path d="M4 18v3"/>
+                <path d="M8 14v7"/>
+              </svg>
+            </div>
+            <h3>Vendas e oportunidades</h3>
+            <p>
+              Qualifica contatos, cria propostas, lembra follow-ups e ajuda sua
+              equipe a não perder negócios.
+            </p>
+            <span class="learn">Explorar possibilidades →</span>
+          </article>
+
+          <article>
+            <div class="cap-num">03</div>
+            <div class="cap-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect width="8" height="8" x="3" y="3" rx="2"/>
+                <path d="M7 11v4a2 2 0 0 0 2 2h4"/>
+                <rect width="8" height="8" x="13" y="13" rx="2"/>
+              </svg>
+            </div>
+            <h3>Financeiro e gestão</h3>
+            <p>
+              Registra movimentações, acompanha vencimentos, identifica desvios
+              e transforma dados em alertas.
+            </p>
+            <span class="learn">Explorar possibilidades →</span>
+          </article>
+
+          <article>
+            <div class="cap-num">04</div>
+            <div class="cap-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M8 2v4"/>
+                <path d="M16 2v4"/>
+                <path d="M21 14V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8"/>
+                <path d="M3 10h18"/>
+                <path d="m16 20 2 2 4-4"/>
+              </svg>
+            </div>
+            <h3>Agenda e produtividade</h3>
+            <p>
+              Organiza compromissos, prioridades, tarefas e entrega um resumo
+              claro do que realmente importa.
+            </p>
+            <span class="learn">Explorar possibilidades →</span>
+          </article>
+
+          <article>
+            <div class="cap-num">05</div>
+            <div class="cap-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+                <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+                <circle cx="11.5" cy="14.5" r="2.5"/>
+                <path d="M13.3 16.3 15 18"/>
+              </svg>
+            </div>
+            <h3>Documentos e informações</h3>
+            <p>
+              Lê PDFs e planilhas, localiza informações e cria relatórios,
+              documentos e apresentações.
+            </p>
+            <span class="learn">Explorar possibilidades →</span>
+          </article>
+
+          <article>
+            <div class="cap-num">06</div>
+            <div class="cap-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+                <path d="M20 3v4"/>
+                <path d="M22 5h-4"/>
+                <path d="M4 17v2"/>
+                <path d="M5 18H3"/>
+              </svg>
+            </div>
+            <h3>Automações personalizadas</h3>
+            <p>
+              Conecta rotinas, regras e ferramentas de acordo com a realidade
+              e a viabilidade de cada projeto.
+            </p>
+            <span class="learn">Explorar possibilidades →</span>
+          </article>
+        </div>
+
+        <p class="disclaimer">
+          As funções são configuradas conforme a necessidade, a viabilidade
+          técnica e as integrações disponíveis em cada projeto.
+        </p>
+      </div>
+    </section>
+
+    <!-- Demonstração -->
+    <section class="section demo shell" id="demonstracao" aria-labelledby="demo-heading">
+      <div class="demo-copy">
+        <div class="eyebrow">NÃO É PROMESSA. JÁ ESTÁ FUNCIONANDO.</div>
+        <h2 id="demo-heading">
+          Uma inteligência executiva <em>viva no centro da operação.</em>
+        </h2>
+        <p>
+          O Comando RUB nasceu para organizar uma operação real: financeiro,
+          agenda, cotações, alertas e prioridades em uma única visão.
+        </p>
+        <ul>
+          <li><span aria-hidden="true">✓</span>Conversa por voz ou texto</li>
+          <li><span aria-hidden="true">✓</span>Informações importantes em tempo real</li>
+          <li><span aria-hidden="true">✓</span>Recomendações e próximos passos</li>
+          <li><span aria-hidden="true">✓</span>Experiência adaptada ao negócio</li>
+        </ul>
+        <a
+          href="https://wa.me/5549991191991?text=Ol%C3%A1%2C%20quero%20descobrir%20o%20que%20posso%20automatizar%20com%20o%20AgentRub."
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-link"
+        >
+          Quero algo assim na minha empresa <span aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <div class="command-mockup" role="img" aria-label="Demonstração visual do Comando RUB em funcionamento">
+        <div class="mock-top">
+          <span class="mock-brand"><i aria-hidden="true"></i> COMANDO RUB</span>
+          <span class="online" aria-hidden="true">● ONLINE</span>
+        </div>
+        <div class="mock-body">
+          <div class="mock-cards">
+            <div>
+              <small>SALDO · MÊS</small>
+              <b>R$ 18.240</b>
+              <span>Receitas e despesas</span>
+            </div>
+            <div>
+              <small>COTAÇÕES · HOJE</small>
+              <b class="white">34 <i>/ 28 ok</i></b>
+              <span>6 novas atualizações</span>
+            </div>
+          </div>
+          <div class="mini-agent" aria-hidden="true">
+            <div class="mini-head">✦</div>
+            <img src="assets/rub-ruby-positivo.png" alt=""/>
+            <b>RUB · À ESCUTA</b>
+          </div>
+          <div class="mock-cards right">
+            <div class="alert">
+              <small>INADIMPLÊNCIA</small>
+              <b>R$ 29.196</b>
+              <span>17 títulos em atenção</span>
+            </div>
+            <div>
+              <small>AGENDA · HOJE</small>
+              <span>14:00 · Reunião</span>
+              <span>16:30 · Vistoria</span>
+              <span>19:00 · Live</span>
+            </div>
+          </div>
+        </div>
+        <div class="mock-input">
+          <span><b aria-hidden="true">RUB:</b> Tudo pronto. É só me chamar.</span>
+          <button type="button" disabled aria-hidden="true">ESPAÇO · FALAR</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Personalização -->
+    <section class="section identity" id="personalizacao">
+      <div class="shell identity-grid">
+        <div class="identity-visual">
+          <div class="identity-halo" aria-hidden="true"></div>
+          <img
+            src="assets/rub-ruby-confianca.png"
+            alt="RUB e ANA em pose confiante, representando as duas opções de identidade do agente"
+          />
+        </div>
+        <div class="identity-copy">
+          <div class="eyebrow">ESCOLHA QUEM VAI REPRESENTAR SEU AGENTE</div>
+          <h2>RUB ou ANA.<br/><em>A inteligência é sua.</em></h2>
+          <p>
+            As capacidades são as mesmas. Você escolhe a identidade e nós
+            configuramos tudo o que torna o agente realmente seu.
+          </p>
+          <div class="custom-list">
+            <span>Voz</span>
+            <span>Comportamento</span>
+            <span>Conhecimentos</span>
+            <span>Funções</span>
+            <span>Regras</span>
+            <span>Identidade da empresa</span>
+            <span>Autonomia</span>
+            <span>Integrações</span>
+          </div>
+          <blockquote>
+            "Você escolhe quem vai representar seu agente. Nós ensinamos como ele
+            deve trabalhar."
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- Processo -->
+    <section class="section shell process" id="como-funciona" aria-labelledby="process-heading">
+      <div class="center-intro compact">
+        <div class="eyebrow">DO ENTENDIMENTO À EXECUÇÃO</div>
+        <h2 id="process-heading">
+          Personalizado de verdade.<br/><em>Sem complicação.</em>
+        </h2>
+        <p>Não entregamos um agente genérico. Construímos com você.</p>
+      </div>
+
+      <div class="steps">
+        <article>
+          <span>01</span>
+          <div>
+            <h3>Entendimento</h3>
+            <p>Conhecemos sua rotina, dificuldades e objetivos.</p>
+          </div>
+        </article>
+        <article>
+          <span>02</span>
+          <div>
+            <h3>Definição</h3>
+            <p>
+              Configuramos voz, comportamento, conhecimento, regras e funções.
+            </p>
+          </div>
+        </article>
+        <article>
+          <span>03</span>
+          <div>
+            <h3>Construção</h3>
+            <p>Criamos seu agente e conectamos as ferramentas necessárias.</p>
+          </div>
+        </article>
+        <article>
+          <span>04</span>
+          <div>
+            <h3>Validação</h3>
+            <p>
+              Testamos situações reais do seu negócio e refinamos as respostas.
+            </p>
+          </div>
+        </article>
+        <article>
+          <span>05</span>
+          <div>
+            <h3>Entrega</h3>
+            <p>
+              Disponibilizamos sua plataforma e orientamos sua equipe.</p>
+          </div>
+        </article>
+        <article>
+          <span>06</span>
+          <div>
+            <h3>Evolução</h3>
+            <p>
+              Seu agente recebe novas funções conforme sua operação amadurece.
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <div class="delivery">
+        <div class="clock">
+          48<small>H</small>
+        </div>
+        <div>
+          <b>Primeira versão funcional em até 48 horas</b>
+          <p>
+            Após o diagnóstico e o recebimento das informações necessárias.
+            Projetos com integrações específicas podem exigir prazo adicional.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Investimento -->
+    <section class="section investment">
+      <div class="shell investment-inner">
+        <div>
+          <div class="eyebrow">MAIS ACESSÍVEL DO QUE PARECE</div>
+          <h2>
+            Ter seu próprio agente custa <em>menos do que você imagina.</em>
+          </h2>
+          <p>
+            Antes de falar em preço, queremos descobrir quanto tempo e dinheiro
+            sua operação está perdendo hoje.
+          </p>
+          <ul>
+            <li>✓ Diagnóstico inicial sem compromisso</li>
+            <li>✓ Projeto dimensionado para sua realidade</li>
+            <li>✓ Você sabe exatamente o que será entregue</li>
+          </ul>
+        </div>
+        <div class="quote-card">
+          <span aria-hidden="true">“</span>
+          <p>
+            Se ele recuperar apenas algumas horas da sua semana, quanto isso já vale
+            para sua empresa — e para sua vida?
+          </p>
+          <a
+            href="https://wa.me/5549991191991?text=Ol%C3%A1%2C%20quero%20descobrir%20o%20que%20posso%20automatizar%20com%20o%20AgentRub."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary"
+          >
+            Descobrir meu projeto ideal <b aria-hidden="true">→</b>
+          </a>
+          <small>Conversa rápida. Sem compromisso.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section shell faq" aria-labelledby="faq-heading">
+      <div>
+        <div class="eyebrow">PERGUNTAS FREQUENTES</div>
+        <h2 id="faq-heading">
+          O que você precisa saber <em>antes de começar.</em>
+        </h2>
+      </div>
+
+      <div class="faq-list" role="list">
+        <article class="open" role="listitem">
+          <button
+            type="button"
+            aria-expanded="true"
+            aria-controls="faq-content-1"
+            id="faq-button-1"
+          >
+            <span>É apenas um chatbot?</span>
+            <b aria-hidden="true">−</b>
+          </button>
+          <div id="faq-content-1" role="region" aria-labelledby="faq-button-1">
+            <div>
+              <p>
+                Não. O AgentRub conhece sua operação, segue regras, consulta informações,
+                gera entregas e executa rotinas compatíveis com o seu projeto.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article role="listitem">
+          <button
+            type="button"
+            aria-expanded="false"
+            aria-controls="faq-content-2"
+            id="faq-button-2"
+          >
+            <span>Qual é a diferença entre RUB e ANA?</span>
+            <b aria-hidden="true">+</b>
+          </button>
+          <div id="faq-content-2" role="region" aria-labelledby="faq-button-2" hidden>
+            <div>
+              <p>
+                As capacidades são as mesmas. Você escolhe a identidade masculina
+                ou feminina e personaliza voz, comportamento, conhecimentos e funções.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article role="listitem">
+          <button
+            type="button"
+            aria-expanded="false"
+            aria-controls="faq-content-3"
+            id="faq-button-3"
+          >
+            <span>Fica pronto em 48 horas?</span>
+            <b aria-hidden="true">+</b>
+          </button>
+          <div id="faq-content-3" role="region" aria-labelledby="faq-button-3" hidden>
+            <div>
+              <p>
+                A primeira versão funcional pode ser entregue em até 48 horas após
+                o diagnóstico e o recebimento das informações. Integrações
+                específicas podem exigir prazo adicional.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article role="listitem">
+          <button
+            type="button"
+            aria-expanded="false"
+            aria-controls="faq-content-4"
+            id="faq-button-4"
+          >
+            <span>Preciso instalar algum programa?</span>
+            <b aria-hidden="true">+</b>
+          </button>
+          <div id="faq-content-4" role="region" aria-labelledby="faq-button-4" hidden>
+            <div>
+              <p>
+                Não. A plataforma é responsiva, funciona no navegador e pode ser
+                instalada como PWA no computador ou celular.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article role="listitem">
+          <button
+            type="button"
+            aria-expanded="false"
+            aria-controls="faq-content-5"
+            id="faq-button-5"
+          >
+            <span>Quanto custa?</span>
+            <b aria-hidden="true">+</b>
+          </button>
+          <div id="faq-content-5" role="region" aria-labelledby="faq-button-5" hidden>
+            <div>
+              <p>
+                Cada agente é dimensionado conforme sua necessidade. A implantação
+                costuma custar menos do que o cliente imagina — e a conversa
+                inicial não tem compromisso.
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="final-cta">
+      <div class="final-orbit" aria-hidden="true"></div>
+      <div class="shell final-inner">
+        <img
+          src="assets/rub-ruby-positivo.png"
+          alt="RUB e ANA em postura positiva, confirmando a solução"
+        />
+        <div>
+          <div class="eyebrow">SEU NEGÓCIO PODE FUNCIONAR DE UM JEITO MELHOR.</div>
+          <h2>
+            Seu agente pode começar a ganhar vida <em>nas próximas 48 horas.</em>
+          </h2>
+          <p>
+            Conte como sua empresa funciona. Nós mostramos o que é possível
+            automatizar.
+          </p>
+          <a
+            href="https://wa.me/5549991191991?text=Ol%C3%A1%2C%20quero%20descobrir%20o%20que%20posso%20automatizar%20com%20o%20AgentRub."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary"
+          >
+            Quero criar meu agente <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+      <div class="shell footer-grid">
+        <div>
+          <img src="assets/agentrub-logo.png" alt="AgentRub"/>
+          <p>
+            Agentes de IA personalizados para transformar rotina em execução.</p>
+        </div>
+        <div>
+          <b>Navegação</b>
+          <a href="#possibilidades">Possibilidades</a>
+          <a href="#personalizacao">Personalização</a>
+          <a href="#como-funciona">Como funciona</a>
+        </div>
+        <div>
+          <b>Fale com a RUB</b>
+          <a
+            href="https://wa.me/5549991191991?text=Ol%C3%A1%2C%20quero%20descobrir%20o%20que%20posso%20automatizar%20com%20o%20AgentRub."
+            target="_blank"
+            rel="noopener noreferrer"
+          >WhatsApp</a>
+          <a href="https://rubnegocios.com.br" target="_blank" rel="noopener noreferrer">
+            rubnegocios.com.br
+          </a>
+          <a href="mailto:rubens@rubnegocios.com.br">rubens@rubnegocios.com.br</a>
+        </div>
+        <div class="powered">
+          <span>UMA SOLUÇÃO</span>
+          <img src="assets/apprub-logo.png" alt="AppRub"/>
+        </div>
+      </div>
+      <div class="shell footer-bottom">
+        <span>© 2026 RUB Negócios. Todos os direitos reservados.</span>
+        <span>Onde negócios evoluem.</span>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
