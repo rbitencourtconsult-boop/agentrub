@@ -36,6 +36,7 @@
         <img src="assets/agentrub-logo.png" alt="AgentRub"/>
       </a>
       <div class="nav-links">
+        <a href="#diagnostico">Diagnóstico</a>
         <a href="#possibilidades">Possibilidades</a>
         <a href="#personalizacao">Personalização</a>
         <a href="#como-funciona">Como funciona</a>
@@ -224,6 +225,136 @@
             simplesmente para você.
           </p>
         </div>
+      </div>
+    </section>
+
+    <!-- Diagnóstico rápido: fluxo em steps (3 perguntas ramificadas) -->
+    <section class="section diagnostic" id="diagnostico" aria-labelledby="diagnostic-heading">
+      <div class="shell diagnostic-grid">
+        <div class="diagnostic-copy">
+          <div class="eyebrow">DIAGNÓSTICO RÁPIDO</div>
+          <h2 id="diagnostic-heading">
+            Qual o perfil de agente ideal para <em>sua operação?</em>
+          </h2>
+          <p>
+            Responda 3 perguntas — elas se adaptam ao seu cenário — e receba
+            uma recomendação personalizada de perfil, foco e primeiros passos
+            de automação.
+          </p>
+
+          <ol class="diagnostic-progress" aria-label="Progresso do diagnóstico">
+            <li class="is-active" data-step="1">
+              <span class="num">01</span>
+              <span>Entendemos sua dor</span>
+            </li>
+            <li data-step="2">
+              <span class="num">02</span>
+              <span>Aprofundamos o contexto</span>
+            </li>
+            <li data-step="3">
+              <span class="num">03</span>
+              <span>Entendemos o seu objetivo</span>
+            </li>
+          </ol>
+        </div>
+
+        <div class="diagnostic-panel" id="diagnostic-panel">
+        <form class="diagnostic-form" id="diagnostic-form" novalidate>
+          <!-- Step 1: sempre igual para todo mundo -->
+          <div class="diagnostic-step is-active" data-step="1" role="group" aria-labelledby="step-title-1">
+            <div class="step-head">
+              <span class="step-kicker">Pergunta 01 de 03</span>
+              <h3 id="step-title-1">Qual problema mais consome o tempo da sua equipe hoje?</h3>
+            </div>
+            <div class="diagnostic-options" data-step-name="pain">
+              <label>
+                <input type="radio" name="pain" value="atendimento"/>
+                <span>Atendimento demorado e mensagens sem resposta</span>
+              </label>
+              <label>
+                <input type="radio" name="pain" value="vendas"/>
+                <span>Vendas sem acompanhamento e oportunidades perdidas</span>
+              </label>
+              <label>
+                <input type="radio" name="pain" value="financeiro"/>
+                <span>Financeiro desorganizado e vencimentos esquecidos</span>
+              </label>
+              <label>
+                <input type="radio" name="pain" value="agenda"/>
+                <span>Agenda, tarefas e prioridades dispersas</span>
+              </label>
+              <label>
+                <input type="radio" name="pain" value="documentos"/>
+                <span>Documentos, processos e informações difíceis de localizar</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Step 2: será preenchido via JS conforme a resposta do step 1 -->
+          <div class="diagnostic-step" data-step="2" role="group" aria-labelledby="step-title-2" hidden>
+            <div class="step-head">
+              <span class="step-kicker">Pergunta 02 de 03</span>
+              <h3 id="step-title-2"></h3>
+            </div>
+            <div class="diagnostic-options" data-step-name="context"></div>
+          </div>
+
+          <!-- Step 3: será preenchido via JS conforme steps 1 e 2 -->
+          <div class="diagnostic-step" data-step="3" role="group" aria-labelledby="step-title-3" hidden>
+            <div class="step-head">
+              <span class="step-kicker">Pergunta 03 de 03</span>
+              <h3 id="step-title-3"></h3>
+            </div>
+            <div class="diagnostic-options" data-step-name="goal"></div>
+          </div>
+
+          <p class="diagnostic-error" id="diagnostic-error" role="alert" hidden></p>
+
+          <div class="diagnostic-nav">
+            <button type="button" class="btn-secondary diagnostic-prev" id="diagnostic-prev" disabled hidden>
+              <span aria-hidden="true">←</span> Anterior
+            </button>
+          </div>
+        </form>
+
+        <div class="diagnostic-result" id="diagnostic-result" role="dialog"
+             aria-labelledby="diagnostic-title" tabindex="-1" aria-live="polite" hidden>
+          <div class="result-card">
+            <button type="button" class="result-close" id="diagnostic-close"
+                    aria-label="Voltar e refazer o diagnóstico">
+              <span aria-hidden="true">&times;</span>
+            </button>
+
+            <div class="result-head">
+              <small>PERFIL RECOMENDADO</small>
+              <div class="profile-badge" id="diagnostic-badge">Perfil</div>
+              <h3 id="diagnostic-title"></h3>
+              <p id="diagnostic-description"></p>
+            </div>
+
+            <div class="result-body">
+              <div class="profile-match" aria-label="Compatibilidade dos perfis">
+                <h4>Compatibilidade</h4>
+                <ul id="diagnostic-match"></ul>
+              </div>
+
+              <div class="profile-actions">
+                <h4>Primeiros passos</h4>
+                <ul id="diagnostic-actions"></ul>
+              </div>
+            </div>
+
+            <div class="result-foot">
+              <a id="diagnostic-whatsapp" class="btn-primary" target="_blank" rel="noopener noreferrer">
+                Conversar sobre esta solução <span aria-hidden="true">&#8599;</span>
+              </a>
+              <button type="button" class="diagnostic-reset" id="diagnostic-reset">
+                Refazer diagnóstico
+              </button>
+            </div>
+          </div>
+        </div>
+        </div><!-- /.diagnostic-panel -->
       </div>
     </section>
 

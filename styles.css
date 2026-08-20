@@ -757,6 +757,581 @@ input[type="range"] {
 /* ==============================
    10. POSSIBILIDADES
    ============================== */
+/* ==============================
+   9b. DIAGNÓSTICO RÁPIDO (3 perguntas, perfil recomendado)
+   ============================== */
+.diagnostic {
+  background:
+    radial-gradient(circle at 12% 20%, rgba(245, 158, 11, 0.08), transparent 34%),
+    radial-gradient(circle at 88% 72%, rgba(212, 169, 77, 0.06), transparent 40%),
+    #03121b;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.diagnostic-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 70px;
+  align-items: start;
+}
+
+.diagnostic-copy h2 {
+  margin: 12px 0 20px;
+  font-size: clamp(36px, 4vw, 58px);
+  line-height: 1.06;
+}
+
+.diagnostic-copy h2 em {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.diagnostic-copy p {
+  max-width: 480px;
+  color: #9aadb7;
+  line-height: 1.6;
+}
+
+/* Barra de progresso lateral (3 passos) */
+.diagnostic-progress {
+  list-style: none;
+  margin: 36px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  counter-reset: step;
+  position: relative;
+}
+
+.diagnostic-progress::before {
+  content: "";
+  position: absolute;
+  top: 22px;
+  bottom: 22px;
+  left: 23px;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    rgba(212, 169, 77, 0.8) 0%,
+    rgba(212, 169, 77, 0.3) 40%,
+    rgba(35, 71, 88, 0.35) 40.01%,
+    rgba(35, 71, 88, 0.35) 100%
+  );
+  transition: background 0.4s ease;
+}
+
+.diagnostic-progress[data-step="2"]::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(212, 169, 77, 0.9) 0%,
+    rgba(212, 169, 77, 0.9) 62%,
+    rgba(35, 71, 88, 0.4) 62.01%,
+    rgba(35, 71, 88, 0.4) 100%
+  );
+}
+
+.diagnostic-progress[data-step="3"]::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(212, 169, 77, 0.95) 0%,
+    rgba(212, 169, 77, 0.95) 100%
+  );
+}
+
+.diagnostic-progress li {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 14px;
+  align-items: center;
+  color: #8fa4af;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.3;
+  z-index: 1;
+  transition: color 0.25s ease;
+}
+
+.diagnostic-progress li .num {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #2b4f61;
+  background: rgba(4, 20, 30, 0.6);
+  color: #6c8794;
+  font: 700 13px var(--font-body);
+  letter-spacing: 0.06em;
+  transition:
+    background-color 0.28s ease,
+    border-color 0.28s ease,
+    color 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.diagnostic-progress li.is-active {
+  color: var(--ink);
+}
+
+.diagnostic-progress li.is-active .num {
+  background: linear-gradient(135deg, #f59e0b 0%, #d4a94d 100%);
+  border-color: var(--gold);
+  color: #04141e;
+  box-shadow: 0 10px 26px rgba(212, 169, 77, 0.25);
+}
+
+.diagnostic-progress li.is-done {
+  color: #aabcc5;
+}
+
+.diagnostic-progress li.is-done .num {
+  background: rgba(212, 169, 77, 0.12);
+  border-color: rgba(212, 169, 77, 0.45);
+  color: var(--gold);
+}
+
+/* Painel: o formulário e o resultado ocupam exatamente o mesmo espaço */
+.diagnostic-panel {
+  position: relative;
+}
+
+/* Card do formulário */
+.diagnostic-form {
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-3xl);
+  background: rgba(2, 11, 16, 0.84);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(2px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: filter 0.35s ease, opacity 0.35s ease, transform 0.35s ease;
+}
+
+/* Com o resultado aberto, as perguntas ficam ao fundo (desfocadas) */
+.diagnostic-panel.is-result .diagnostic-form {
+  filter: blur(5px) saturate(0.7);
+  opacity: 0.4;
+  transform: scale(0.985);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Cada pergunta */
+.diagnostic-step {
+  padding: 28px 28px 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: none;
+  transition: background-color 0.35s ease;
+}
+
+.diagnostic-step:first-child {
+  border-top: 0;
+}
+
+.diagnostic-step:not([hidden]) {
+  display: block;
+}
+
+.diagnostic-step.is-active {
+  background: linear-gradient(
+    to bottom,
+    rgba(245, 158, 11, 0.04) 0%,
+    rgba(2, 11, 16, 0.0) 72%
+  );
+}
+
+.diagnostic-step.is-done {
+  background: rgba(212, 169, 77, 0.03);
+}
+
+.step-head {
+  margin-bottom: 14px;
+}
+
+.step-kicker {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 5px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(212, 169, 77, 0.35);
+  background: rgba(212, 169, 77, 0.08);
+  color: var(--gold);
+  font: 700 10px/1 var(--font-body);
+  letter-spacing: 0.18em;
+}
+
+.diagnostic-step h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.diagnostic-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.diagnostic-options label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 54px;
+  padding: 12px 14px;
+  border: 1px solid #234758;
+  border-radius: var(--radius);
+  background: #04141e;
+  color: #b6c5cc;
+  cursor: pointer;
+  position: relative;
+  font-size: 13.5px;
+  line-height: 1.45;
+  transition:
+    border-color 0.22s ease,
+    background-color 0.22s ease,
+    color 0.22s ease,
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.diagnostic-options label:hover {
+  border-color: rgba(212, 169, 77, 0.75);
+  background: rgba(245, 158, 11, 0.06);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+
+.diagnostic-options label:has(input:checked) {
+  border-color: var(--gold);
+  background: linear-gradient(
+    135deg,
+    rgba(245, 158, 11, 0.14) 0%,
+    rgba(245, 158, 11, 0.04) 100%
+  );
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px rgba(212, 169, 77, 0.35);
+}
+
+
+
+.diagnostic-options input {
+  accent-color: var(--gold);
+  margin-top: 4px;
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+}
+
+.diagnostic-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 28px 22px;
+  margin-top: 10px;
+}
+
+.diagnostic-nav .btn-secondary {
+  margin: 0;
+  width: auto;
+  padding-inline: 14px;
+  padding-block: 10px;
+  font-size: 13px;
+}
+
+.diagnostic-nav .btn-secondary[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.diagnostic-error {
+  margin: 4px 28px 0;
+  color: #ff9d9d;
+  font-size: 12.5px;
+  min-height: 0;
+}
+
+/* Card de resultado: modal ancorado sobre as perguntas */
+.diagnostic-result {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: none;
+  padding: 12px;
+  border-radius: var(--radius-3xl);
+  background:
+    radial-gradient(circle at 50% -10%, rgba(245, 158, 11, 0.14), transparent 62%),
+    rgba(1, 8, 12, 0.74);
+  backdrop-filter: blur(6px);
+  animation: diagnosticVeilIn 0.28s ease both;
+}
+
+.diagnostic-result:not([hidden]) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes diagnosticVeilIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.result-card {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  max-height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 24px 24px 0;
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(212, 169, 77, 0.34);
+  background: linear-gradient(180deg, #071a25 0%, #02101a 100%);
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 169, 77, 0.4) transparent;
+  animation: diagnosticResultIn 0.42s cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+@keyframes diagnosticResultIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+
+.result-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.result-card::-webkit-scrollbar-thumb {
+  border-radius: var(--radius-pill);
+  background: rgba(212, 169, 77, 0.4);
+}
+
+.result-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  color: #9aadb7;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.result-close:hover {
+  color: var(--gold);
+  border-color: rgba(212, 169, 77, 0.5);
+  background: rgba(212, 169, 77, 0.1);
+}
+
+.result-head {
+  padding-right: 38px;
+}
+
+.result-head small {
+  color: var(--gold);
+  font: 700 10px var(--font-body);
+  letter-spacing: 0.2em;
+  vertical-align: middle;
+}
+
+.profile-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 5px 10px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(135deg, #f59e0b 0%, #d4a94d 100%);
+  color: #04141e;
+  font: 700 10px var(--font-body);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  box-shadow: 0 8px 20px rgba(212, 169, 77, 0.26);
+}
+
+.result-head h3 {
+  margin: 12px 0 8px;
+  color: var(--ink);
+  font-size: 24px;
+  line-height: 1.12;
+}
+
+.result-head p {
+  margin: 0;
+  color: #92a5b0;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.result-body {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.profile-match,
+.profile-actions {
+  padding: 14px 16px;
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(4, 20, 30, 0.6);
+}
+
+.profile-match h4,
+.profile-actions h4 {
+  margin: 0 0 10px;
+  color: var(--gold);
+  font: 700 10px var(--font-body);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.profile-match ul,
+.profile-actions ul {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profile-match li,
+.profile-actions li {
+  color: #9aadb7;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.profile-match li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+}
+
+.profile-match li:last-child {
+  border-bottom: 0;
+}
+
+.profile-match li strong {
+  color: var(--ink);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.profile-match .match-bar {
+  width: 88px;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: rgba(35, 71, 88, 0.55);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.profile-match .match-bar > span {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, #f59e0b 0%, #d4a94d 100%);
+  box-shadow: 0 0 10px rgba(212, 169, 77, 0.5);
+}
+
+.profile-actions li {
+  padding-left: 20px;
+  position: relative;
+}
+
+.profile-actions li::before {
+  content: "◆";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  color: var(--gold);
+  font-size: 9px;
+}
+
+/* Fica colado no rodapé do card: o CTA nunca some ao rolar o conteúdo */
+.result-foot {
+  position: sticky;
+  bottom: 0;
+  margin-top: 18px;
+  padding: 14px 0 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(2, 16, 26, 0) 0%,
+    rgba(2, 16, 26, 0.86) 38%,
+    #02101a 62%
+  );
+}
+
+.result-foot .btn-primary {
+  width: 100%;
+  justify-content: center;
+  padding-block: 12px;
+  font-size: 13.5px;
+}
+
+.diagnostic-reset {
+  display: block;
+  margin: 10px auto 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #8fa4af;
+  font: 500 12.5px var(--font-body);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.diagnostic-reset:hover {
+  color: var(--gold);
+}
+
+/*
+ * Sempre que o card do modal for largo o bastante, os dois blocos ficam lado
+ * a lado — isso corta a altura pela metade e evita rolagem interna.
+ * Entre 951px e 1099px o grid do diagnóstico ainda tem 2 colunas, então o card
+ * é estreito e os blocos seguem empilhados.
+ */
+@media (min-width: 700px) and (max-width: 950px) {
+  .result-body {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+@media (min-width: 1100px) {
+  .result-body {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .profile-match .match-bar {
+    width: 72px;
+  }
+}
+
 .capabilities {
   background-color: rgba(2, 11, 16, 0.78);
   border-block: 1px solid rgba(255, 255, 255, 0.08);
@@ -1632,6 +2207,7 @@ footer {
   }
 
   .calculator,
+  .diagnostic-grid,
   .demo,
   .identity-grid,
   .investment-inner,
@@ -1767,6 +2343,68 @@ footer {
 
   .calculator {
     grid-template-columns: 1fr;
+  }
+
+  .diagnostic-grid,
+  .diagnostic-options {
+    grid-template-columns: 1fr;
+  }
+
+  .diagnostic-step {
+    padding: 24px 22px 18px;
+  }
+
+  .diagnostic-step h3 {
+    font-size: 17px;
+  }
+
+  .diagnostic-nav {
+    padding: 8px 22px 20px;
+  }
+
+  .diagnostic-nav .btn-secondary {
+    flex: 0 0 auto;
+    min-width: 0;
+    padding-inline: 12px;
+    padding-block: 9px;
+    font-size: 12.5px;
+  }
+
+  .diagnostic-error {
+    margin: 4px 22px 0;
+  }
+
+  .diagnostic-result {
+    padding: 8px;
+  }
+
+  .result-card {
+    padding: 20px 18px 0;
+  }
+
+  .result-foot {
+    padding: 12px 0 18px;
+  }
+
+  .profile-match li {
+    padding: 4px 0;
+  }
+
+  .result-head h3 {
+    font-size: 21px;
+  }
+
+  .profile-match,
+  .profile-actions {
+    padding: 13px 14px;
+  }
+
+  .profile-match li strong {
+    white-space: normal;
+  }
+
+  .profile-match .match-bar {
+    width: 60px;
   }
 
   .calc-controls,
